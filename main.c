@@ -1,3 +1,6 @@
+// TODO
+// figure out public/private functions per c file (every file should have 1 root and n helpers)
+
 #include <stdio.h>
 #include <string.h>
 #include "help.h"

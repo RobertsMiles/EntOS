@@ -22,4 +22,4 @@ static void help();
 /**
  * Prints a summary of each command.
  */
-static void printGlossary();
+static void glossary();

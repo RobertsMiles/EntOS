@@ -4,13 +4,15 @@
 // require password to logon as user
 // finish vin
 // fix about
+// add lisp interpreter
+// add color coding
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <sys/stat.h>
 #include <sys/types.h>
-#include "main.h"
+#include "ent.h"
 #include "vin.h"
 
 char hostnameBuffer[9];
@@ -80,7 +82,7 @@ void printName(char* name) {
 }
 
 void printPrompt() {
-    printf(": ");
+    printf(" -> ");
 }
 
 void clear() {
@@ -89,10 +91,13 @@ void clear() {
 
 static void about() {
     FILE* about;
+    char ch;
     about = fopen("root/about", "r");
-    fprintf(about, "%s", stdout);
-    printf("\n");
+    while ((ch = fgetc(about)) != EOF) {
+        printf("%c", ch);
+    }
     fclose(about);
+    printf("\n");
 }
 
 static void welcome() {
@@ -100,14 +105,13 @@ static void welcome() {
 }
 
 static void help() {
-    printf("\nAvailable commands:\n");
-    printGlossary();
+    printf("Available commands:\n");
+    glossary();
 }
 
-static void printGlossary() {
+static void glossary() {
     printf("help\t-\tthis command\n");
     printf("about\t-\tabout the ENT system\n");
     printf("clear\t-\tclears terminal\n");
     printf("vin\t-\ttext editor\n");
-    printf("\n");
 }

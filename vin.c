@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <string.h>
-#include "main.h"
+#include "ent.h"
 #include "vin.h"
 
 char name[9] = "Vin";

@@ -2,6 +2,7 @@
 // figure out public/private functions per c file (every file should have 1 root and n helpers)
 
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 #include "main.h"
 #include "vin.h"
@@ -27,6 +28,7 @@ int main() {
         if (!strcmp(inputBuffer, "help")) help();
         else if (!strcmp(inputBuffer, "vin")) vin();
 
+        else if (!strcmp(inputBuffer, "clear")) clear();
         else if (!strcmp(inputBuffer, "quit")) return 0;
         else printf("Unknown command: \"%s\"\n", inputBuffer);
     }
@@ -46,6 +48,10 @@ void printHost() {
     printf("%s:%s -> ", hostname, username);
 }
 
+void clear() {
+    system("clear");
+}
+
 void printName(char* name) {
     printf("%s -> ", name);
 }
@@ -55,10 +61,13 @@ static void welcome() {
 }
 
 static void help() {
-    printf("This is the ENT Operating System, a completely impractical suite of software that I am writing for fun. ENT is a recursive acronym that stands for \"ENT's Not TempleOS\".\n");
+    printf("\nAvailable commands:\n");
     printGlossary();
 }
 
 static void printGlossary() {
-    printf("TODO\n");
+    printf("help\t-\tthis command\n");
+    printf("clear\t-\tclears terminal\n");
+    printf("vin\t-\ttext editor\n");
+    printf("\n");
 }

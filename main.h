@@ -6,6 +6,8 @@ void printHost();
 
 void printName(char* name);
 
+void clear();
+
 static void welcome();
 
 /**

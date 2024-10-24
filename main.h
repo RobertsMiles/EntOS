@@ -10,6 +10,8 @@ void printName(char* name);
 
 void clear();
 
+static void about();
+
 static void welcome();
 
 /**

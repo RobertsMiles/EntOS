@@ -1,5 +1,8 @@
 // TODO
 // allow for multiple users
+// reset hostname and username
+// require password to logon as user
+// finish vin
 
 #include <stdio.h>
 #include <stdlib.h>

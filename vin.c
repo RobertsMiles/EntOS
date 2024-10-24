@@ -24,6 +24,7 @@ static void input() {
     while (1) {
         printHost();
         printName(name);
+        printPrompt();
         scanf("%s", inputBuffer);
 
         if (!strcmp(inputBuffer, "help")) help();

@@ -4,6 +4,8 @@ void setUsername();
 
 void printHost();
 
+void printPrompt();
+
 void printName(char* name);
 
 void clear();

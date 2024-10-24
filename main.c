@@ -1,14 +1,16 @@
 // TODO
-// figure out public/private functions per c file (every file should have 1 root and n helpers)
+// allow for multiple users
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <sys/stat.h>
+#include <sys/types.h>
 #include "main.h"
 #include "vin.h"
 
-char hostname[9];
-char username[9];
+char hostnameBuffer[9];
+char usernameBuffer[9];
 
 int main() {
     char inputBuffer[99];
@@ -23,6 +25,7 @@ int main() {
     // main input loop
     while (1) {
         printHost();
+        printPrompt();
         scanf("%s", inputBuffer);
 
         if (!strcmp(inputBuffer, "help")) help();
@@ -35,25 +38,51 @@ int main() {
 }
 
 void setHostname() {
-    printf("Hostname: ");
-    scanf("%s", hostname);
+    FILE* hostname;
+    mkdir("root", 0777);
+    hostname = fopen("root/hostname", "r");
+    if (hostname == NULL) {
+        hostname = fopen("root/hostname", "w");
+        printf("Hostname: ");
+        scanf("%s", hostnameBuffer);
+        fprintf(hostname, "%s", hostnameBuffer);
+    }
+    else {
+        fgets(hostnameBuffer, 9, hostname); 
+    }
+    fclose(hostname);
 }
 
 void setUsername() {
-    printf("Username: ");
-    scanf("%s", username);
+    FILE* username;
+    mkdir("root", 0777);
+    username = fopen("root/username", "r");
+    if (username == NULL) {
+        username = fopen("root/username", "w");
+        printf("Username: ");
+        scanf("%s", usernameBuffer);
+        fprintf(username, "%s", usernameBuffer);
+    }
+    else {
+        fgets(usernameBuffer, 9, username); 
+    }
+    fclose(username);
 }
 
 void printHost() {
-    printf("%s:%s -> ", hostname, username);
+    printf("%s:%s", hostnameBuffer, usernameBuffer);
+}
+
+void printName(char* name) {
+    printf(":%s", name);
+}
+
+void printPrompt() {
+    printf(": ");
 }
 
 void clear() {
     system("clear");
-}
-
-void printName(char* name) {
-    printf("%s -> ", name);
 }
 
 static void welcome() {

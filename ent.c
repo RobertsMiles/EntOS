@@ -6,14 +6,14 @@
 // fix about
 // add lisp interpreter
 // add color coding
+// add file for index of programs that each program adds to to be read by glossary() and welcome()
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <sys/stat.h>
-#include <sys/types.h>
 #include "ent.h"
 #include "vin.h"
+#include "entish.h"
 
 char hostnameBuffer[9];
 char usernameBuffer[9];
@@ -36,41 +36,12 @@ int main() {
 
         if (!strcmp(inputBuffer, "help")) help();
         else if (!strcmp(inputBuffer, "vin")) vin();
+        else if (!strcmp(inputBuffer, "entish")) entish();
         else if (!strcmp(inputBuffer, "clear")) clear();
         else if (!strcmp(inputBuffer, "about")) about();
         else if (!strcmp(inputBuffer, "quit")) return 0;
         else printf("Unknown command: \"%s\"\n", inputBuffer);
     }
-}
-
-void setHostname() {
-    FILE* hostname;
-    hostname = fopen("root/hostname", "r");
-    if (hostname == NULL) {
-        hostname = fopen("root/hostname", "w");
-        printf("Hostname: ");
-        scanf("%s", hostnameBuffer);
-        fprintf(hostname, "%s", hostnameBuffer);
-    }
-    else {
-        fgets(hostnameBuffer, 9, hostname); 
-    }
-    fclose(hostname);
-}
-
-void setUsername() {
-    FILE* username;
-    username = fopen("root/username", "r");
-    if (username == NULL) {
-        username = fopen("root/username", "w");
-        printf("Username: ");
-        scanf("%s", usernameBuffer);
-        fprintf(username, "%s", usernameBuffer);
-    }
-    else {
-        fgets(usernameBuffer, 9, username); 
-    }
-    fclose(username);
 }
 
 void printHost() {
@@ -87,6 +58,36 @@ void printPrompt() {
 
 void clear() {
     system("clear");
+}
+
+static void setHostname() {
+    FILE* hostname;
+    hostname = fopen("root/hostname", "r");
+    if (hostname == NULL) {
+        hostname = fopen("root/hostname", "w");
+        printf("Hostname: ");
+        scanf("%s", hostnameBuffer);
+        fprintf(hostname, "%s", hostnameBuffer);
+    }
+    else {
+        fgets(hostnameBuffer, 9, hostname); 
+    }
+    fclose(hostname);
+}
+
+static void setUsername() {
+    FILE* username;
+    username = fopen("root/username", "r");
+    if (username == NULL) {
+        username = fopen("root/username", "w");
+        printf("Username: ");
+        scanf("%s", usernameBuffer);
+        fprintf(username, "%s", usernameBuffer);
+    }
+    else {
+        fgets(usernameBuffer, 9, username); 
+    }
+    fclose(username);
 }
 
 static void about() {
@@ -112,6 +113,7 @@ static void help() {
 static void glossary() {
     printf("help\t-\tthis command\n");
     printf("about\t-\tabout the ENT system\n");
-    printf("clear\t-\tclears terminal\n");
+    printf("clear\t-\tclear the terminal\n");
     printf("vin\t-\ttext editor\n");
+    printf("entish\t-\tbasic RPM interpreter\n");
 }

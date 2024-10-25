@@ -3,7 +3,7 @@
 #include "ent.h"
 #include "vin.h"
 
-char name[9] = "Vin";
+static char name[9] = "Vin";
 
 void vin() {
     welcome();
@@ -15,7 +15,7 @@ static void welcome() {
 }
 
 static void help() {
-    return;
+    printf("TODO\n");
 }
 
 static void input() {

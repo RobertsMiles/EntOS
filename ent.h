@@ -1,7 +1,3 @@
-void setHostname();
-
-void setUsername();
-
 void printHost();
 
 void printPrompt();
@@ -9,6 +5,10 @@ void printPrompt();
 void printName(char* name);
 
 void clear();
+
+static void setHostname();
+
+static void setUsername();
 
 static void about();
 

@@ -16,7 +16,8 @@ static void welcome() {
 }
 
 static void help() {
-    printf("TODO\n");
+    printf("Enter a reverse polish notation expression with each token separated by a space. The expression is ended with the '=' symbol.\n");
+    printf("For example, the expression '10 4 * 2 / =' resolves to '20'\n");
 }
 
 static void input() {
@@ -37,16 +38,17 @@ static void input() {
             scanf(" %s", inputBuffer);
 
             if (!strcmp(inputBuffer, "quit")) return;
-            else if (!strcmp(inputBuffer, "=")) {
-                printf("%d\n", topNode->value);
-                topNode = freeStack(topNode);
-                break;
-            }
+            else if (!strcmp(inputBuffer, "help")) {help(); break;}
             else if (!strcmp(inputBuffer, "+")) topNode = add(topNode);
             else if (!strcmp(inputBuffer, "-")) topNode = subtract(topNode);
             else if (!strcmp(inputBuffer, "*")) topNode = multiply(topNode);
             else if (!strcmp(inputBuffer, "/")) topNode = divide(topNode);
             else if (!strcmp(inputBuffer, "%")) topNode = modulus(topNode);
+            else if (!strcmp(inputBuffer, "=")) {
+                printf("%d\n", topNode->value);
+                topNode = freeStack(topNode);
+                break;
+            }
             else topNode = push(topNode, atoi(inputBuffer));
         }
     }

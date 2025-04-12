@@ -34,7 +34,7 @@ static void input() {
         printHost();
         printName(name);
         printPrompt();
-        while (1) {
+        do {
             scanf(" %s", inputBuffer);
 
             if (!strcmp(inputBuffer, "quit")) return;
@@ -44,13 +44,10 @@ static void input() {
             else if (!strcmp(inputBuffer, "*")) topNode = multiply(topNode);
             else if (!strcmp(inputBuffer, "/")) topNode = divide(topNode);
             else if (!strcmp(inputBuffer, "%")) topNode = modulus(topNode);
-            else if (!strcmp(inputBuffer, "=")) {
-                printf("%d\n", topNode->value);
-                topNode = freeStack(topNode);
-                break;
-            }
             else topNode = push(topNode, atoi(inputBuffer));
-        }
+        } while (!strcmp(inputBuffer, ""));
+        printf("%d\n", topNode->value);
+        topNode = freeStack(topNode);
     }
 }
 
